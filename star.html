@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+          <style>
+        	table{
+        		width: 800px;
+				text-align: center;
+        	}
+
+        	tr{
+        		background-color: pink;
+        	}
+
+        	tr:nth-child(odd){
+        		background-color: yellowgreen;
+        	}
+        </style>
+    </head>
+    <body>
+
+    	<button>获取数据</button>
+    	<table>
+    		
+    	</table>
+		<script src="ajax.js"></script>
+    	<script>
+    		//点击按钮 向服务器请求数据，把服务器返回的数据 以表格的形式 展示在页面中
+
+    		document.querySelector('button').onclick=function(){
+
+    			//请求服务器
+    			$.ajax({
+    				type:'get',
+    				url:'star.php',
+    				data:null,
+    				callback:function(info){
+    					console.log(info);
+
+    					//渲染
+    					var html='';
+
+    					for(var i=0;i<info.length;i++){
+    						
+    						html+='<tr>';
+    						html+='<td>'+info[i].name+'</td>';
+    						html+='<td>'+info[i].age+'</td>';
+    						html+='<td>'+info[i].sex+'</td>';
+    						html+='<td>'+info[i].photo+'</td>';
+    						html+='<td>'+info[i].album+'</td>';
+    						html+='</tr>';
+    					}
+
+    					document.querySelector('table').innerHTML=html;
+    				}
+    			});
+    		}
+    		
+    	</script>
+    </body>
+</html>
